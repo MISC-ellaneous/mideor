@@ -20,3 +20,7 @@
   * id
   * account id
   * sound data
+
+## Research
+
+Can we uniquely fingerprint a midi device?
