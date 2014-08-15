@@ -1,6 +1,3 @@
-midithing
-=========
-
 ## MVP
 
 * When I arrive at the site, and I do not have a midi device connected, I should get video instructions.
@@ -8,3 +5,18 @@ midithing
 * When I click record, and it records my midi input.
 * When recording completes, it should be added to the stream.
 * For each item in the stream, I should have a play button.
+
+## Tech Plan
+
+* meteor.js for server
+* Mongo for storage
+
+## DB
+
+* account
+  * id
+  * midi fingerprint
+* sounds
+  * id
+  * account id
+  * sound data
