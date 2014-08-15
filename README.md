@@ -20,3 +20,8 @@
   * id
   * account id
   * sound data
+
+## Browser support
+
+* The only browser that supports this project is Google Chrome. In order to turn on support, go to
+* chrome://flags/ , find Enable Web MIDI API, and Enable it.
