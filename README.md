@@ -21,7 +21,14 @@
   * account id
   * sound data
 
-## Browser support
+## Browser Support
 
-* The only browser that supports this project is Google Chrome. In order to turn on support, go to
-* chrome://flags/ , find Enable Web MIDI API, and Enable it.
+This project is supported by Google Chrome, using its experimental Midi API.
+
+* Enter "chrome://flags/" in URL bar in the browser window, find 
+* "Enable Web MIDI API" 
+* Select "Enable"
+
+## Research
+
+Can we uniquely fingerprint a midi device?
