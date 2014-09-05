@@ -21,6 +21,10 @@
   * account id
   * sound data
 
+## Virtual MIDI device
+
+* http://sourceforge.net/projects/vmpk/ works as a midi input device on OSX
+
 ## Browser Support
 
 This project is supported by Google Chrome, using its experimental Midi API.
