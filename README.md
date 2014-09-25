@@ -6,6 +6,10 @@
 * When recording completes, it should be added to the stream.
 * For each item in the stream, I should have a play button.
 
+## Meteor-Boilerplate
+
+http://matteodem.github.io/meteor-boilerplate/
+
 ## Tech Plan
 
 * meteor.js for server
