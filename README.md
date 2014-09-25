@@ -29,6 +29,10 @@ http://matteodem.github.io/meteor-boilerplate/
 
 * http://sourceforge.net/projects/vmpk/ works as a midi input device on OSX
 
+## Testing MIDI input
+
+* http://webaudiodemos.appspot.com/midi-synth/index.html
+
 ## Browser Support
 
 This project is supported by Google Chrome, using its experimental Midi API.
@@ -40,3 +44,24 @@ This project is supported by Google Chrome, using its experimental Midi API.
 ## Research
 
 Can we uniquely fingerprint a midi device?
+
+## Various
+
+Catching Midi input in JS:
+http://jsbin.com/wururi/1/
+
+Midi input:
+https://github.com/cwilso/WebMIDIAPIShim
+
+Synthesizer:
+https://github.com/clutterjoe/midi-synth
+
+Midi Keyboard:
+http://www.manyetas.com/creed/midikeys.html
+
+Meteor scaffold and tutorials:
+http://meteortips.com/book/
+https://github.com/matteodem/meteor-boilerplate
+
+MongoDB tutorials:
+http://docs.mongodb.org/manual/core/crud-introduction/
