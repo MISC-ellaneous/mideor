@@ -4,9 +4,9 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-less
+particle4dev:sass
 jquery
-underscore
+alethes:lodash
 accounts-password
 accounts-ui
 aldeed:collection2
@@ -16,4 +16,6 @@ raix:handlebar-helpers
 nooitaf:semantic-ui
 mrt:mocha-web-velocity
 velocity:html-reporter
+insecure
+autopublish
 
