@@ -66,6 +66,31 @@ Template.home.events({
 
 
 Template.home.rendered = function () {
+
+  var Mids = new Mongo.Collection('Mids');
+  var currentMid = false;
+
+  navigator.requestMIDIAccess().then(function (m) {
+    console.log('access granted')
+    m.inputs()[0].onmidimessage = function (message) {
+
+      if (currentMid) {
+        Mids.update(currentMid, {$push: {'notes': message}})
+      }
+
+      console.log(message)
+    }
+  },
+  function (err) {
+    console.log("uh-oh! Something went wrong!  Error code: " + err.code );
+  });
+
+  $('#record').click(function(){
+
+    currentMid = Mids.insert({'notes': []});
+
+  });
+
   // @see: http://stackoverflow.com/questions/5284814/jquery-scroll-to-div
   $('a[href*=#]:not([href=#])').click(function () {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
