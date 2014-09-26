@@ -47,8 +47,15 @@ Template.home.events({
  */
 Template.home.rendered = function() {
   navigator.requestMIDIAccess().then(function (m) {
-    MIDI = m.inputs.values().next().value;
-    console.log(MIDI);
+    // Web MIDI API changed in Chrome 29 here's a catchall.
+    // Chrome < 29:
+    if (typeof m.inputs === 'function') {
+      MIDI = m.inputs()[0];
+    } else {
+      // Chrome > 29:
+      MIDI = m.inputs.values().next().value;
+      console.log(MIDI);
+    }
     // If no device
     if (!MIDI) {
       console.log('no midi device.');
