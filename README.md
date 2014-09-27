@@ -47,6 +47,9 @@ Can we uniquely fingerprint a midi device?
 
 ## Various
 
+MIDI Key Codes and Notes
+http://computermusicresource.com/midikeys.html
+
 Frequencies and Notes
 http://www.phy.mtu.edu/~suits/notefreqs.html
 
