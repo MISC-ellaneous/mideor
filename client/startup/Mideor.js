@@ -1,10 +1,12 @@
 Meteor.startup(function () {
 
-  // Trying to perserve the global namespace.
-  Mideor = {};
-  Mideor.MIDI = false;
+  Mideor        = {};
+  Mideor.MIDI   = false;
+  Mideor.debug  = true;
 
-  Mideor.debug = true;
+  /**
+   * Like console.log but it preppends "Mideor: "
+   */
   Mideor.log = function() {
     if (!Mideor.debug) { return; }
     var args = Array.prototype.slice.call(arguments);
@@ -13,46 +15,36 @@ Meteor.startup(function () {
     console.log.apply(console, args);
   }
 
-  // Get the midi device if we can.
-  navigator.requestMIDIAccess()
-    .then(function (m) {
-      // Web MIDI API changed in Chrome 29 here's a catchall.
-      // Chrome < 29:
-      if (typeof m.inputs === 'function') {
-        Mideor.MIDI = m.inputs()[0];
-      } else {
-        // Chrome > 29:
-        Mideor.MIDI = m.inputs.values().next().value;
+  /**
+   * Save incoming notes to the database.
+   * @param  mid      the id of the Mid record to be updated.
+   * @return function this matches the function sign of MIDI.onmidimessage
+   *                  so that it is composable.
+   */
+  Mideor.saveNote = function(mid) {
+    return function(message) {
+      // Push events to database.
+      var note = {
+        keys: message.data,
+        time: message.timeStamp
       }
-      if (Mideor.MIDI) {
-        Mideor.log(Mideor.MIDI);
-        Mideor.MIDI.onmidimessage = Mideor.playNote;
-      } else {
-        Mideor.log('no midi device.');
-      }
-    });
-    //.fail(function(err) {
-    //  Mideor.log("MIDI Access Failure. Error code: " + err.code );
-    //});
+      Mid.update(mid, {$push: {'notes': note}});
 
-
-  // Save the MIDI notes to the database.
-  Mideor.saveNote = function(message) {
-    // Push events to database.
-    var note = {
-      keys: message.data,
-      time: message.timestamp
+      // Make it composable with other midi message handlers.
+      return message;
     }
-    Mid.update(mid, {$push: {'notes': note}});
-
-    // Make it composable with other midi message handlers.
-    return message;
   }
 
-  // Save the MIDI notes to the database.
+  /**
+   * Plays a note from a MIDI event.
+   * @return message so that this is composable.
+   */
   Mideor.playNote = function(message) {
-    var note = message.data;
-    var letter = Mideor.keycodeToNoteLetter[note[1]];
+    var note = {
+      keys: message.data,
+      time: message.timeStamp
+    }
+    var letter = Mideor.keycodeToNoteLetter[note.keys[1]];
     Mideor.log(letter, note);
 
 
@@ -60,6 +52,10 @@ Meteor.startup(function () {
     return message;
   }
 
+  /**
+   * Plays an Mid record.
+   * @param record an Mid record.
+   */
   Mideor.playMid = function(mid) {
     var sequence = new Sequence();
     sequence.loop = false;
@@ -69,11 +65,13 @@ Meteor.startup(function () {
 
   /**
    * Do a thing as many times as specified.
+   * @param number   the number of times to do the thing.
+   * @param Function the thing to do. Gets passed the nth time called.
    */
   Mideor.loop = function (times, fn) {
     var t = times;
     while (t) {
-      fn(times - t);
+      fn((times - t) + 1);
       t--;
     }
   }

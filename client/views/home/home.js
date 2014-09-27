@@ -10,6 +10,7 @@ Template.home.events({
    *   * Push midi events to a db record until end time condition is met.
    */
   'click #record': function(event) {
+    // Create new record.
     var mid = Mid.insert({
       notes: [],
       createdAt: Date.now()
@@ -21,10 +22,10 @@ Template.home.events({
       .addClass('green');
 
     // Triggered for every midi input.
-    Mideor.MIDI.onmidimessage = _.compose(Mideor.playNote, Mideor.saveNote);
+    Mideor.MIDI.onmidimessage = _.compose(Mideor.playNote, Mideor.saveNote(mid));
     Meteor.setTimeout(function() {
       var mid = null;
-      Mideor.MIDI.onmidimessage = playNote;
+      Mideor.MIDI.onmidimessage = Mideor.playNote;
       $('#record')
         .removeClass('green')
         .addClass('red');
