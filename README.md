@@ -47,6 +47,9 @@ Can we uniquely fingerprint a midi device?
 
 ## Various
 
+Frequencies and Notes
+http://www.phy.mtu.edu/~suits/notefreqs.html
+
 Catching Midi input in JS:
 http://jsbin.com/wururi/1/
 
