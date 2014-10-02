@@ -45,13 +45,18 @@ This project is supported by Google Chrome, using its experimental Midi API.
 
 Can we uniquely fingerprint a midi device?
 
-## Various
+## Notes & MIDI
+
+Music.js
+https://github.com/gregjopa/music.js
 
 MIDI Key Codes and Notes
 http://computermusicresource.com/midikeys.html
 
 Frequencies and Notes
 http://www.phy.mtu.edu/~suits/notefreqs.html
+
+## Various
 
 Catching Midi input in JS:
 http://jsbin.com/wururi/1/
